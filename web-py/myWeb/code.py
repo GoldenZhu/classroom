@@ -24,6 +24,8 @@ class movie:
 	def GET(self, movie_id):
 		movie_id = movie_id.encode('unicode-escape')
 		condition = 'id=' + movie_id
+		print movie_id
+		print condition
 		movie = db.select('movie', where=condition)[0]
 		return render.movie(movie)
 
