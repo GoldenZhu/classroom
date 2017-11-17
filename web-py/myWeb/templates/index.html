@@ -1,4 +1,10 @@
-$def with (movies)
+$def with (movies, count, key)
+<style type="text/css">
+	.search {
+		font-size: 20px;
+		color: deepskyblue;
+	}
+</style>
 <h4>欢迎来到</h4>
 <h1>Crossin's Movie Site</h1>
 <hr>
@@ -6,10 +12,24 @@ $def with (movies)
 	<input type="text" name="title" />
   	<input type="submit" value="搜索" />
 </form>
-<p>影片列表：</p>
+$if count>0:
+	<p>
+	共 $count 部影片
+	$if key:
+	与 <span class="search">$key</span> 有关
+	</p>
+		<p>影片列表：</p>
+$else:
+	<p>暂无相关电影</p>
 $for movie in movies:
 	<li>
 		<a href="/movie/$movie['id']">$movie['title']</a>
 	</li>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript"></script>
+<script>
+//jQuery(document).ready(function(){
+//  jQuery("p").click(function(){
+//    jQuery(this).hide();
+//  });
+//});
+</script>
