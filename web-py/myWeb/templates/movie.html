@@ -3,6 +3,18 @@ $def with (movie)
 <h1>$movie.title</h1>
 <hr>
 <img src="/static/poster/$(movie.id).jpg">
+$ directors = movie.directors.split(',')
+<p>
+    <span>导演：</span>
+    $for director in directors:
+        <a href="">$director</a>
+</p>
+$ casts = movie.casts.split(',')
+<p>
+    <span>主演：</span>
+    $for cast in casts:
+        <a href="/cast/$cast">$cast</a>
+</p>
 <p>年代：$movie.year</p>
 <p>国家：$movie.countries</p>
 <p>简介：$movie.summary</p>

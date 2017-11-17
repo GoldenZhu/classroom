@@ -6,6 +6,7 @@ render = web.template.render('templates/')
 urls = (
 	'/', 'index',
 	'/movie/(\d+)', 'movie',
+	'/cast/(.*)', 'cast',
 )
 
 class index:
@@ -24,10 +25,15 @@ class movie:
 	def GET(self, movie_id):
 		movie_id = movie_id.encode('unicode-escape')
 		condition = "id='" + movie_id +"'"
-		print movie_id
-		print condition
 		movie = db.select('movie', where=condition)[0]
 		return render.movie(movie)
+
+class cast:
+	def GET(self, cast_name):
+		condition = r'casts like "%' + cast_name + r'%"'
+		print condition
+		movies = db.select('movie', where=condition)
+		return render.index(movies)
 
 if __name__ == "__main__":
 	app = web.application(urls, globals())
